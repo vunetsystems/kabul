@@ -7,7 +7,7 @@
 <#import "components/atoms/link.ftl" as link>
 <#import "components/molecules/identity-provider.ftl" as identityProvider>
 <#import "features/labels/username.ftl" as usernameLabel>
-
+<#-- we have changed the default login form in keycloak. This file is not used in code. The changes we made in login form are present in this file. This is just a backup of the changes we made in login.ftl if keycloak.-->
 <#assign usernameLabel><@usernameLabel.kw /></#assign>
 
 <@layout.registrationLayout
