@@ -146,47 +146,13 @@ public class OtpAuthenticatorForm  extends AbstractUsernameFormAuthenticator imp
              context.forceChallenge(challengeResponse);
             return false;
         }
-        boolean valid = mockvalidateWithNPCI(context, inputData);
+        boolean valid = validateWithNPCI(context, inputData);
         if(!valid) {
         	context.resetFlow();
         }
         
 		return valid;
     }
-    
-    private boolean mockvalidateWithNPCI(AuthenticationFlowContext context, MultivaluedMap<String, String> inputData) {
-	    try {
-	    	logger.info("mock");
-
-	        String username = inputData.getFirst(AuthenticationManager.FORM_USERNAME);
-	        String otp = inputData.getFirst(OTP);
-	        if(otp.equals("11")){
-	        	return true;
-	        } else if(otp.equals("22")) {
-	        	context.getEvent().error(Errors.INVALID_CODE);
-	            Response challengeResponse = challenge(context, Messages.INVALID_TOTP);
-	            context.failureChallenge(AuthenticationFlowError.INVALID_CREDENTIALS, challengeResponse);
-	            return false;
-	        } else if(otp.equals("33")) {
-	        	context.getEvent().error(Errors.USER_NOT_FOUND);
-	            Response challengeResponse = challenge(context, "User not registered");
-	            context.failureChallenge(AuthenticationFlowError.INVALID_USER, challengeResponse);
-	            return false;
-	        } else if(otp.equals("44")) {
-	        	context.getEvent().error(Errors.INVALID_TOKEN);
-	            Response challengeResponse = challenge(context,Messages.INTERNAL_SERVER_ERROR);
-	            context.failureChallenge(AuthenticationFlowError.INTERNAL_ERROR, challengeResponse);
-	            return false;
-	        }
-			
-		} catch (Exception e) {
-			logger.error("Exception in validating OTP ",e);
-		}
-	    Response challengeResponse = challenge(context,Messages.INTERNAL_SERVER_ERROR);
-        context.failureChallenge(AuthenticationFlowError.INTERNAL_ERROR, challengeResponse);
-		return false;
-	}
-
 
     private boolean validateWithNPCI(AuthenticationFlowContext context, MultivaluedMap<String, String> inputData) {
 	    try {
