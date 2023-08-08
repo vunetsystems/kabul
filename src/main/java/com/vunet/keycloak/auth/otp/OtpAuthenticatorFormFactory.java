@@ -1,4 +1,4 @@
-package com.mesutpiskin.keycloak.auth.email;
+package com.vunet.keycloak.auth.otp;
 
 import com.google.auto.service.AutoService;
 import org.keycloak.Config;
@@ -12,11 +12,11 @@ import org.keycloak.provider.ProviderConfigProperty;
 import java.util.List;
 
 @AutoService(AuthenticatorFactory.class)
-public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
+public class OtpAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public String getDisplayType() {
-        return "Email OTP";
+        return "OTP Authenticator";
     }
 
     @Override
@@ -46,7 +46,7 @@ public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public String getHelpText() {
-        return "Email otp authenticator.";
+        return "OTP Authenticator.";
     }
 
     @Override
@@ -61,7 +61,7 @@ public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        return new EmailAuthenticatorForm(session);
+        return new OtpAuthenticatorForm(session);
     }
 
     @Override
@@ -76,6 +76,6 @@ public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public String getId() {
-        return EmailAuthenticatorForm.ID;
+        return OtpAuthenticatorForm.ID;
     }
 }
