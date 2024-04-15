@@ -1,4 +1,4 @@
-package com.mesutpiskin.keycloak.auth.email;
+package com.vunet.keycloak.auth.otp;
 
 import lombok.experimental.UtilityClass;
 

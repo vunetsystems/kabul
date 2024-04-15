@@ -1,4 +1,4 @@
-package com.mesutpiskin.keycloak.auth.email;
+package com.vunet.keycloak.auth.otp;
 
 import com.google.auto.service.AutoService;
 import org.keycloak.Config;
@@ -12,25 +12,21 @@ import org.keycloak.provider.ProviderConfigProperty;
 import java.util.List;
 
 @AutoService(AuthenticatorFactory.class)
-public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
-    @Override
-    public String getId() {
-        return "email-authenticator";
-    }
+public class OtpAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public String getDisplayType() {
-        return "Email OTP";
+        return "OTP Authenticator";
     }
 
     @Override
     public String getReferenceCategory() {
-        return "otp";
+        return null;
     }
 
     @Override
     public boolean isConfigurable() {
-        return true;
+        return false;
     }
 
     public static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
@@ -50,18 +46,12 @@ public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public String getHelpText() {
-        return "Email otp authenticator.";
+        return "OTP Authenticator.";
     }
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
-        return List.of(
-                new ProviderConfigProperty(EmailConstants.CODE_LENGTH, "Code length",
-                        "The number of digits of the generated code.",
-                        ProviderConfigProperty.STRING_TYPE, String.valueOf(EmailConstants.DEFAULT_LENGTH)),
-                new ProviderConfigProperty(EmailConstants.CODE_TTL, "Time-to-live",
-                        "The time to live in seconds for the code to be valid.", ProviderConfigProperty.STRING_TYPE,
-                        String.valueOf(EmailConstants.DEFAULT_TTL)));
+        return null;
     }
 
     @Override
@@ -71,7 +61,7 @@ public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        return new EmailAuthenticatorForm(session);
+        return new OtpAuthenticatorForm(session);
     }
 
     @Override
@@ -82,5 +72,10 @@ public class EmailAuthenticatorFormFactory implements AuthenticatorFactory {
     @Override
     public void postInit(KeycloakSessionFactory factory) {
         // NOOP
+    }
+
+    @Override
+    public String getId() {
+        return OtpAuthenticatorForm.ID;
     }
 }
